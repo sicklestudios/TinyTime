@@ -304,7 +304,8 @@ class _MyRegisterState extends State<MyRegister> {
 
   _moveToNextScreen() {
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).push(FadePageRoute(page: DashboardPage()));
+      Navigator.of(context)
+          .pushReplacement(FadePageRoute(page: DashboardPage()));
     });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_intro_screen/courses/identify.dart';
 import 'package:flutter_intro_screen/courses/memory.dart';
+import 'package:flutter_intro_screen/methods/auth_methods.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../courses/draw.dart';
 import '../courses/puzzle.dart';
@@ -8,6 +9,8 @@ import '../course_components/quiz/quiz.dart';
 import '../courses/story.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -24,16 +27,26 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Colors.transparent,
         body: ListView(
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      await AuthMethods().signOut();
+                    },
+                    icon: const Icon(Icons.logout_rounded))
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0, left: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const SizedBox(height: 0),
+                children: const [
+                  SizedBox(height: 0),
                 ],
               ),
             ),
-            const SizedBox(height: 25.0),
+            // const SizedBox(height: 25.0),
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: Row(
@@ -62,7 +75,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Drawing(),
+                            builder: (context) => const Drawing(),
                           ),
                         );
                       },
@@ -252,7 +265,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Identify(),
+                            builder: (context) => const Identify(),
                           ),
                         );
                       },

@@ -5,11 +5,12 @@ import 'package:flutter_intro_screen/Screens/Intro.dart';
 import 'package:flutter_intro_screen/Screens/login.dart';
 import 'package:flutter_intro_screen/Screens/register.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_intro_screen/constants.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
@@ -47,14 +48,38 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       )),
-      home: const WelcomeScreen(),
+      home: _getWidget(),
       routes: {
         'welcome': ((context) => const WelcomeScreen()),
         'intro': ((context) => const IntroPage()),
         'signup': ((context) => const MyRegister()),
         'login': ((context) => const MyLogin()),
-        'dashboard': ((context) => DashboardPage()),
+        'dashboard': ((context) => const DashboardPage()),
       },
     );
+  }
+
+  Widget _getWidget() {
+    {
+      return StreamBuilder(
+          stream: firebaseAuth.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
+                return DashboardPage();
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              }
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return const WelcomeScreen();
+          });
+    }
   }
 }

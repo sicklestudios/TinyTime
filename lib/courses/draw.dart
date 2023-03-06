@@ -4,6 +4,8 @@ import '../course_components/draw/doodle.dart';
 import '../course_components/draw/shapes.dart';
 
 class Drawing extends StatefulWidget {
+  const Drawing({super.key});
+
   @override
   _DrawingState createState() => _DrawingState();
 }
@@ -32,8 +34,8 @@ class _DrawingState extends State<Drawing> {
                         height: 200,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const SizedBox(width: 43),
                           Text(
                             'Learn to Draw',
                             style: GoogleFonts.cabinSketch(
