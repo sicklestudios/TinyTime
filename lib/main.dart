@@ -26,23 +26,23 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Intro Screen',
       theme: ThemeData(
           textTheme: const TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 25,
           color: Colors.blue,
           fontWeight: FontWeight.bold,
         ),
-        headline2: TextStyle(
+        displayMedium: TextStyle(
             fontSize: 18,
             color: Colors.blueAccent,
             fontWeight: FontWeight.w400,
             wordSpacing: 1.2,
             height: 1.2),
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontSize: 18,
           color: Colors.amber,
           fontWeight: FontWeight.bold,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           fontSize: 18,
           color: Colors.amber,
           fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return DashboardPage();
+                return const DashboardPage();
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(snapshot.error.toString()),
