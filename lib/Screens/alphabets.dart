@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'dart:math';
+import 'dart:math' as math;
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -100,7 +100,7 @@ class _AlphabetState extends State<Alphabet> {
   }
 
   Color _getRandomColor() {
-    final random = Random();
+    final random = math.Random();
     return Color.fromARGB(
       255,
       random.nextInt(256),
@@ -184,6 +184,14 @@ class _AlphabetState extends State<Alphabet> {
                           onTap: (() {
                             playSound(
                                 "${currentWords[index].toUpperCase()}.MP3");
+                            String currentLetter = _alphabet[_currentIndex];
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                              return DetailScreen(
+                                path:
+                                    "${currentLetter.substring(0, 1)}${index + 1}",
+                              );
+                            }));
                           }),
                           child: Text(
                             currentWords[index],
@@ -217,6 +225,31 @@ class _AlphabetState extends State<Alphabet> {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final String path;
+
+  const DetailScreen({required this.path, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: 'imageHero',
+            child: Image.asset(
+              "assets/images/${path.toLowerCase()}.png",
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

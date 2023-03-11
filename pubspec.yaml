@@ -57,6 +57,7 @@ dependencies:
   cloud_firestore: ^4.4.3
   provider: ^6.0.5
   animated_text_kit: ^4.2.2
+  email_validator: ^2.1.17
   # url_launcher: ^6.1.9
 dev_dependencies:
   flutter_test:
@@ -85,6 +86,7 @@ flutter:
     - assets/
     - assets/alphabets/
     - assets/audios/
+    - assets/images/
     # - assets/back2.gif
     # - assets/logo2.png
     # - assets/back.jpg
